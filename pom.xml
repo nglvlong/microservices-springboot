@@ -23,6 +23,8 @@
     <modules>
         <module>EurekaService</module>
         <module>GatewayService</module>
+        <module>UserService</module>
+        <module>OrderService</module>
     </modules>
 
 	<build>
