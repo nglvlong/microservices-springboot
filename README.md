@@ -17,9 +17,9 @@ Hệ thống gồm nhiều service độc lập giao tiếp thông qua **Eureka 
 - **Order Service**: Quản lý đơn hàng.
 
 ## 🛠 Công nghệ sử dụng
-- Java 17+
-- Spring Boot 3+
-- Spring Cloud 2023.x
+- Java 17
+- Spring Boot 3
+- Spring Cloud
 - Spring Cloud Netflix (Eureka, Gateway)
 - Maven
 
@@ -170,6 +170,3 @@ http://localhost:8761
 ```
 
 ---
-
-## 📄 Giấy phép
-Dự án này được phát hành theo giấy phép **MIT**.
