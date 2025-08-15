@@ -79,6 +79,7 @@ public class EurekaServerApplication {
 
 ### 2. API Gateway (`api-gateway`)
 **application.yml**
+
 ```yaml
 server:
   port: 8080
@@ -86,24 +87,22 @@ server:
 spring:
   application:
     name: api-gateway
+cloud:
+  gateway:
+    routes:
+      - id: user-service
+        uri: lb://user-service
+        predicates:
+          - Path=/users/**
+      - id: order-service
+        uri: lb://order-service
+        predicates:
+          - Path=/orders/**
 
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: user-service
-          uri: lb://user-service
-          predicates:
-            - Path=/users/**
-        - id: order-service
-          uri: lb://order-service
-          predicates:
-            - Path=/orders/**
 ```
 
 ---
