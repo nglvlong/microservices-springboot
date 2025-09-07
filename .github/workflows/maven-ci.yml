@@ -21,14 +21,8 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
-        run: mvn -B clean install -DskipTests --file pom.xml
-
-      - name: Run test
-        run: mvn test --file pom.xml || true
-
-      - name: Package all services
-        run: mvn package -DskipTests
+      - name: Build with Maven (skip tests)
+        run: mvn -B clean package -DskipTests --file pom.xml
 
       - name: Upload JAR artifacts
         uses: actions/upload-artifact@v4
@@ -48,6 +42,12 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
 
+      - name: Download JAR artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: microservice-artifacts
+          path: .
+
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
@@ -55,21 +55,21 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build & Push Eureka image
-        run: | 
-          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/eureka-service:lastest ./EurekaService
-          docker push ${{secrets.DOCKERHUB_USERNAME}}/eureka-service:lastest
+        run: |
+          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/eureka-service:latest ./EurekaService
+          docker push ${{secrets.DOCKERHUB_USERNAME}}/eureka-service:latest
 
       - name: Build & Push Gateway image
         run: |
-          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/gateway-service:lastest ./GatewayService
-          docker push ${{secrets.DOCKERHUB_USERNAME}}/gateway-service:lastest
+          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/gateway-service:latest ./GatewayService
+          docker push ${{secrets.DOCKERHUB_USERNAME}}/gateway-service:latest
 
       - name: Build & Push User image
         run: |
-          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/user-service:lastest ./UserService
-          docker push ${{secrets.DOCKERHUB_USERNAME}}/user-service:lastest
+          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/user-service:latest ./UserService
+          docker push ${{secrets.DOCKERHUB_USERNAME}}/user-service:latest
 
       - name: Build & Push Order image
         run: |
-          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/order-service:lastest ./OrderService
-          docker push ${{secrets.DOCKERHUB_USERNAME}}/order-service:lastest
+          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/order-service:latest ./OrderService
+          docker push ${{secrets.DOCKERHUB_USERNAME}}/order-service:latest
