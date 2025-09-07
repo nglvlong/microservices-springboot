@@ -56,20 +56,20 @@ jobs:
 
       - name: Build & Push Eureka image
         run: | 
-          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/eureka-service:lastest ./eureka-service
+          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/eureka-service:lastest ./EurekaService
           docker push ${{secrets.DOCKERHUB_USERNAME}}/eureka-service:lastest
 
       - name: Build & Push Gateway image
         run: |
-          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/gateway-service:lastest ./gateway-service
+          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/gateway-service:lastest ./GatewayService
           docker push ${{secrets.DOCKERHUB_USERNAME}}/gateway-service:lastest
 
       - name: Build & Push User image
         run: |
-          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/user-service:lastest ./user-service
+          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/user-service:lastest ./UserService
           docker push ${{secrets.DOCKERHUB_USERNAME}}/user-service:lastest
 
       - name: Build & Push Order image
         run: |
-          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/order-service:lastest ./order-service
+          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/order-service:lastest ./OrderService
           docker push ${{secrets.DOCKERHUB_USERNAME}}/order-service:lastest
