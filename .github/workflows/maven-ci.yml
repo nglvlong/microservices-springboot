@@ -35,10 +35,10 @@ jobs:
         with:
           name: microservice-artifacts
           path: |
-            eureka-service/target/*.jar
-            gateway-service/target/*.jar
-            user-service/target/*.jar
-            order-service/target/*.jar
+            EurekaService/target/*.jar
+            GatewayService/target/*.jar
+            UserService/target/*.jar
+            OrderService/target/*.jar
 
   docker:
     needs: build
