@@ -31,6 +31,7 @@ jobs:
           path: |
             EurekaService/target/*.jar
             GatewayService/target/*.jar
+            CommonLibrary/target/*.jar
             UserService/target/*.jar
             OrderService/target/*.jar
 
@@ -62,6 +63,11 @@ jobs:
         run: |
           docker build -t ${{secrets.DOCKERHUB_USERNAME}}/gateway-service:latest ./GatewayService
           docker push ${{secrets.DOCKERHUB_USERNAME}}/gateway-service:latest
+
+      - name: Build & Push CommonLibrary image
+        run: |
+          docker build -t ${{secrets.DOCKERHUB_USERNAME}}/common-library:latest ./CommonLibrary
+          docker push ${{secrets.DOCKERHUB_USERNAME}}/common-library:latest
 
       - name: Build & Push User image
         run: |
